@@ -41,3 +41,5 @@ groovy-module/**/out
 groovy-module/**/build
 scala-module/**/out
 scala-module/**/build
+kotlin-module/**/out
+kotlin-module/**/build
