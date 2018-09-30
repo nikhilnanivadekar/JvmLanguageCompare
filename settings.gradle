@@ -1,2 +1,3 @@
 rootProject.name = 'jvm-language-compare'
 include 'java-module'
+include 'groovy-module'

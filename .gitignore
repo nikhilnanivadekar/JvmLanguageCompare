@@ -36,3 +36,6 @@ hs_err_pid*
 
 # build output folders
 java-module/**/out
+java-module/**/build
+groovy-module/**/out
+groovy-module/**/build
