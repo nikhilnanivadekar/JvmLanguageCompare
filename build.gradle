@@ -10,4 +10,6 @@ version '1.0-SNAPSHOT'
 ext {
     junit = '4.12'
     groovy = '2.5.2'
+    scala = '2.12.7'
+    scalaTest = '3.0.5'
 }

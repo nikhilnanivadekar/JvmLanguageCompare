@@ -39,3 +39,5 @@ java-module/**/out
 java-module/**/build
 groovy-module/**/out
 groovy-module/**/build
+scala-module/**/out
+scala-module/**/build

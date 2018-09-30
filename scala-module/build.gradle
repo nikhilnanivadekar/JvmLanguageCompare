@@ -1,0 +1,20 @@
+apply plugin: 'scala'
+
+dependencies {
+    compile "org.scala-lang:scala-library:${scala}"
+    testCompile "org.scalatest:scalatest_2.12:${scalaTest}"
+    testCompile "junit:junit:${junit}"
+}
+
+sourceSets {
+    main {
+        scala {
+            srcDirs = ['src/main/scala']
+        }
+    }
+    test {
+        scala {
+            srcDirs = ['src/test/scala']
+        }
+    }
+}
