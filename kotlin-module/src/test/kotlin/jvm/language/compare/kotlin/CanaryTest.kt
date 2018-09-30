@@ -9,9 +9,4 @@ class CanaryTest {
     fun canaryTest() {
         Assert.assertFalse("This is a Canary Test", false)
     }
-
-    @Test
-    fun canaryTestFails() {
-        Assert.assertFalse("This is a Canary Test", true)
-    }
 }
