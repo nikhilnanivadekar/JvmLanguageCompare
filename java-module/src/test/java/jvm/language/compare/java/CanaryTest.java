@@ -9,6 +9,11 @@ public class CanaryTest
     public void canary()
     {
         Assert.assertFalse("This is a Canary Test-1", false);
+    }
+
+    @Test
+    public void canaryFails()
+    {
         Assert.assertFalse("This is a Canary Test-2", true);
     }
 }
