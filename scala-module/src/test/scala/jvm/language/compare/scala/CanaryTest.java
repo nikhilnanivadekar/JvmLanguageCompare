@@ -10,10 +10,4 @@ public class CanaryTest
     {
         Assert.assertFalse("This is a Canary Test", false);
     }
-
-    @Test
-    public void canary_fails()
-    {
-        Assert.assertFalse("This is a Canary Test", true);
-    }
 }
