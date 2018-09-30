@@ -1,0 +1,12 @@
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+group 'jvm-language-compare'
+version '1.0-SNAPSHOT'
+
+ext {
+    junit = '4.12'
+}

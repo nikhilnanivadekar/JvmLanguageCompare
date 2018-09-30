@@ -32,3 +32,7 @@ hs_err_pid*
 .idea/**/modules.xml
 .idea/**/vcs.xml
 .idea/**/workspace.xml
+.idea/modules/**
+
+# build output folders
+java-module/**/out
