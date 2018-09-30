@@ -33,8 +33,11 @@ hs_err_pid*
 .idea/**/vcs.xml
 .idea/**/workspace.xml
 .idea/modules/**
+.idea/*.xml
 
 # build output folders
+.gradle
+build
 java-module/**/out
 java-module/**/build
 groovy-module/**/out

@@ -1,5 +1,5 @@
 rootProject.name = 'jvm-language-compare'
-include 'java-module'
 include 'groovy-module'
-include 'scala-module'
+include 'java-module'
 include 'kotlin-module'
+include 'scala-module'
