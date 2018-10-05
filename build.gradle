@@ -8,6 +8,7 @@ group 'jvm-language-compare'
 version '1.0-SNAPSHOT'
 
 ext {
+    eclipseCollections = '9.2.0'
     junit = '4.12'
     groovy = '2.5.2'
     scala = '2.12.7'

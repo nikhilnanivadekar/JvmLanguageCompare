@@ -3,5 +3,7 @@ apply plugin: 'java'
 sourceCompatibility = 1.8
 
 dependencies {
+    compile "org.eclipse.collections:eclipse-collections-api:${eclipseCollections}"
+    compile "org.eclipse.collections:eclipse-collections:${eclipseCollections}"
     testCompile "junit:junit:${junit}"
 }
