@@ -13,12 +13,12 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class JDK8DeckOfCards
+public class JavaStreamDeckOfCards
 {
     private List<Card> cards;
     private Map<Suit, List<Card>> cardsBySuit;
 
-    public JDK8DeckOfCards()
+    public JavaStreamDeckOfCards()
     {
         this.cards = Collections.unmodifiableList(
                 Card.streamCards().sorted().collect(Collectors.toList()));

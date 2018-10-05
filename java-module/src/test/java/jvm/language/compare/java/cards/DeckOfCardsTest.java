@@ -5,22 +5,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
-import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.list.ImmutableList;
-import org.eclipse.collections.api.multimap.list.ImmutableListMultimap;
+import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.api.stack.MutableStack;
-import org.eclipse.collections.impl.collector.Collectors2;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class DeckOfCardsTest
 {
-    private EclipseCollectionsDeckOfCards ecDeck1 = new EclipseCollectionsDeckOfCards();
-    private JDK8DeckOfCards jdkDeck = new JDK8DeckOfCards();
+    private JavaDeckOfCards ecDeck1 = new JavaDeckOfCards();
+    private JavaStreamDeckOfCards jdkDeck = new JavaStreamDeckOfCards();
 
     @Test
     public void allCards()
@@ -67,7 +62,7 @@ public class DeckOfCardsTest
     @Test
     public void shuffleAndDealHands()
     {
-        ImmutableList<Set<Card>> ec1Hands = this.ecDeck1.shuffleAndDeal(new Random(1), 5, 5);
+        List<Set<Card>> ec1Hands = this.ecDeck1.shuffleAndDeal(new Random(1), 5, 5);
         List<Set<Card>> jdkHands = this.jdkDeck.shuffleAndDeal(new Random(1), 5, 5);
         Assert.assertEquals(ec1Hands, jdkHands);
     }
@@ -78,7 +73,7 @@ public class DeckOfCardsTest
         MutableStack<Card> ecShuffled = this.ecDeck1.shuffle(new Random(1));
         Deque<Card> jdkShuffled = this.jdkDeck.shuffle(new Random(1));
 
-        ImmutableList<Set<Card>> ec1Hands = this.ecDeck1.dealHands(ecShuffled, 5, 5);
+        List<Set<Card>> ec1Hands = this.ecDeck1.dealHands(ecShuffled, 5, 5);
         List<Set<Card>> jdkHands = this.jdkDeck.dealHands(jdkShuffled, 5, 5);
 
         Assert.assertEquals(ec1Hands, jdkHands);
@@ -87,7 +82,7 @@ public class DeckOfCardsTest
     @Test
     public void cardsBySuit()
     {
-        ImmutableListMultimap<Suit, Card> ecCardsBySuit = this.ecDeck1.getCardsBySuit();
+        ListMultimap<Suit, Card> ecCardsBySuit = this.ecDeck1.getCardsBySuit();
         Map<Suit, List<Card>> jdkCardsBySuit = this.jdkDeck.getCardsBySuit();
 
         Assert.assertEquals(ecCardsBySuit.get(Suit.CLUBS), jdkCardsBySuit.get(Suit.CLUBS));
@@ -105,35 +100,5 @@ public class DeckOfCardsTest
     {
         Assert.assertEquals(4, this.ecDeck1.countsByRank().occurrencesOf(Rank.SEVEN));
         Assert.assertEquals(Long.valueOf(4), this.jdkDeck.countsByRank().get(Rank.TEN));
-    }
-
-    @Test
-    public void goodDeals()
-    {
-        Random random = new Random();
-        Predicate<Set<Card>> pair = each ->
-                each.stream().map(Card::getRank).collect(Collectors2.toBag()).sizeDistinct() == 4;
-        Supplier<ImmutableList<Set<Card>>> generator = () -> this.ecDeck1.shuffleAndDeal(random, 5, 5);
-        Set<Card> pairOrBetter = Stream.generate(generator)
-                .filter(hands -> hands.anySatisfy(pair))
-                .findFirst()
-                .get()
-                .detect(pair);
-
-        Predicate<Set<Card>> twoPairs = each ->
-                each.stream().map(Card::getRank).collect(Collectors2.toBag()).sizeDistinct() == 3;
-        Set<Card> twoPairsOrBetter = Stream.generate(generator)
-                .filter(hands -> hands.anySatisfy(twoPairs))
-                .findFirst()
-                .get()
-                .detect(twoPairs);
-
-        Predicate<Set<Card>> fullHouse = each ->
-                each.stream().map(Card::getRank).collect(Collectors2.toBag()).sizeDistinct() == 2;
-        Set<Card> fullHouseOrBetter = Stream.generate(generator)
-                .filter(hands -> hands.anySatisfy(fullHouse))
-                .findFirst()
-                .get()
-                .detect(fullHouse);
     }
 }
