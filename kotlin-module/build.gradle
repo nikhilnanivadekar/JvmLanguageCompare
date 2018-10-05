@@ -3,8 +3,11 @@ plugins {
 }
 
 dependencies {
+    compile project(':java-module')
     compile "org.jetbrains.kotlin:kotlin-stdlib"
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    compile "org.eclipse.collections:eclipse-collections-api:${eclipseCollections}"
+    compile "org.eclipse.collections:eclipse-collections:${eclipseCollections}"
     testCompile "junit:junit:${junit}"
 }
 
