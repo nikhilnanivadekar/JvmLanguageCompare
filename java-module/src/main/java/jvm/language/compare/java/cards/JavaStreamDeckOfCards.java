@@ -20,17 +20,10 @@ public class JavaStreamDeckOfCards
 
     public JavaStreamDeckOfCards()
     {
-        this.cards = Collections.unmodifiableList(
-                Card.streamCards().sorted().collect(Collectors.toList()));
-        this.cardsBySuit =
-                this.cards.stream().collect(Collectors.collectingAndThen(
-                        Collectors.groupingBy(
-                                Card::getSuit,
-                                Collectors.mapping(Function.identity(),
-                                        Collectors.collectingAndThen(
-                                                Collectors.toList(),
-                                                Collections::unmodifiableList))),
-                        Collections::unmodifiableMap));
+        this.cards = Card.streamCards().sorted()
+                .collect(Collectors.toList());
+        this.cardsBySuit = this.cards.stream()
+                .collect(Collectors.groupingBy(Card::getSuit));
     }
 
     public Deque<Card> shuffle(Random random)
@@ -92,12 +85,14 @@ public class JavaStreamDeckOfCards
 
     public Map<Suit, Long> countsBySuit()
     {
-        return this.cards.stream().collect(Collectors.groupingBy(Card::getSuit, Collectors.counting()));
+        return this.cards.stream()
+                .collect(Collectors.groupingBy(Card::getSuit, Collectors.counting()));
     }
 
     public Map<Rank, Long> countsByRank()
     {
-        return this.cards.stream().collect(Collectors.groupingBy(Card::getRank, Collectors.counting()));
+        return this.cards.stream()
+                .collect(Collectors.groupingBy(Card::getRank, Collectors.counting()));
     }
 
     public List<Card> getCards()
