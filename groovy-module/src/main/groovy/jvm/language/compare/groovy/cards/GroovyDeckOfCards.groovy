@@ -9,28 +9,28 @@ class GroovyDeckOfCards {
         this.cardsBySuit = this.cards.groupBy { it.getSuit() }
     }
 
-    Deque<Card> shuffle(Random random) {
+    List<Card> shuffle(Random random) {
         List<Card> shuffled = new ArrayList<>(this.cards)
         Collections.shuffle(shuffled, random)
         Collections.shuffle(shuffled, random)
         Collections.shuffle(shuffled, random)
-        new ArrayDeque<Card>(shuffled)
+        shuffled
     }
 
-    List<Set<Card>> dealHands(Deque<Card> shuffled, int count, int cardsPerHand) {
+    List<Set<Card>> dealHands(List<Card> shuffled, int count, int cardsPerHand) {
         (1..count).collect({ this.deal(shuffled, cardsPerHand) })
     }
 
-    Set<Card> deal(Deque<Card> deque, int count) {
-        (1..count).collect(new HashSet<>(), { deque.pop() }) as Set<Card>
+    Set<Card> deal(List<Card> stack, int count) {
+        (1..count).collect(new HashSet<>(), { stack.pop() }) as Set<Card>
     }
 
-    Card dealOneCard(Deque<Card> deque) {
-        return deque.pop()
+    Card dealOneCard(List<Card> stack) {
+        return stack.pop()
     }
 
     List<Set<Card>> shuffleAndDeal(Random random, int hands, int cardsPerHand) {
-        Deque<Card> shuffled = this.shuffle(random)
+        List<Card> shuffled = this.shuffle(random)
         this.dealHands(shuffled, hands, cardsPerHand)
     }
 
