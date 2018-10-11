@@ -19,6 +19,10 @@ class ScalaDeckOfCards() {
     stack
   }
 
+  def dealHands(shuffled: mutable.ArrayStack[Card], hands: Int, cardsPerHand: Int): Seq[mutable.HashSet[Card]] = {
+    1.to(hands).map(_ => this.deal(shuffled, cardsPerHand)).toList
+  }
+
   def deal(stack: mutable.ArrayStack[Card], count: Int): mutable.HashSet[Card] = {
     val set: mutable.HashSet[Card] = mutable.HashSet()
     1.to(count).foreach(_ => set.add(stack.pop()))
@@ -30,10 +34,6 @@ class ScalaDeckOfCards() {
   def shuffleAndDeal(random: Random, hands: Int, cardsPerHand: Int): Seq[mutable.HashSet[Card]] = {
     val shuffled = this.shuffle(random)
     this.dealHands(shuffled, hands, cardsPerHand)
-  }
-
-  def dealHands(shuffled: mutable.ArrayStack[Card], hands: Int, cardsPerHand: Int): Seq[mutable.HashSet[Card]] = {
-    1.to(hands).map(_ => this.deal(shuffled, cardsPerHand)).toList
   }
 
   def diamonds: Seq[Card] = this.cardsBySuit(Suit.DIAMONDS)

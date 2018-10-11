@@ -17,10 +17,12 @@ class GroovyDeckOfCards {
         new ArrayDeque<Card>(shuffled)
     }
 
+    List<Set<Card>> dealHands(Deque<Card> shuffled, int count, int cardsPerHand) {
+        (1..count).collect({ this.deal(shuffled, cardsPerHand) })
+    }
+
     Set<Card> deal(Deque<Card> deque, int count) {
-        (1..count).inject(
-                new HashSet<>(),
-                { set, each -> set.add(deque.pop()); set })
+        (1..count).collect(new HashSet<>(), { deque.pop() }) as Set<Card>
     }
 
     Card dealOneCard(Deque<Card> deque) {
@@ -30,12 +32,6 @@ class GroovyDeckOfCards {
     List<Set<Card>> shuffleAndDeal(Random random, int hands, int cardsPerHand) {
         Deque<Card> shuffled = this.shuffle(random)
         this.dealHands(shuffled, hands, cardsPerHand)
-    }
-
-    List<Set<Card>> dealHands(Deque<Card> shuffled, int count, int cardsPerHand) {
-        (1..count).inject(
-                new ArrayList<>(),
-                { list, each -> list.add(this.deal(shuffled, cardsPerHand)); list })
     }
 
     List<Card> diamonds() {
