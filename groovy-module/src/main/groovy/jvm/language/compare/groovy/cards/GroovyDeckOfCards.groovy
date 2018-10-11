@@ -48,11 +48,11 @@ class GroovyDeckOfCards {
         this.cardsBySuit.get(Suit.CLUBS)
     }
 
-    Map<Suit, Long> countsBySuit() {
+    Map<Suit, Integer> countsBySuit() {
         this.cards.countBy { it.getSuit() }
     }
 
-    Map<Rank, Long> countsByRank() {
+    Map<Rank, Integer> countsByRank() {
         this.cards.countBy { it.getRank() }
     }
 
