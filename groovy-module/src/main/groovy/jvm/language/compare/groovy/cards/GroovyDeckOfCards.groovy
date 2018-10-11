@@ -11,9 +11,7 @@ class GroovyDeckOfCards {
 
     List<Card> shuffle(Random random) {
         List<Card> shuffled = new ArrayList<>(this.cards)
-        Collections.shuffle(shuffled, random)
-        Collections.shuffle(shuffled, random)
-        Collections.shuffle(shuffled, random)
+        3.times {Collections.shuffle(shuffled, random)}
         shuffled
     }
 

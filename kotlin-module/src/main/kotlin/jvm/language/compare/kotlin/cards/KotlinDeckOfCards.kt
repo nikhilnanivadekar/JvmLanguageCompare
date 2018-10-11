@@ -13,9 +13,7 @@ data class KotlinDeckOfCards(
     // It uses these data structures from JDK.
     fun shuffle(random: Random): MutableStack<Card> {
         var cardCopy = this.cards.toMutableList()
-        cardCopy.shuffle(random)
-        cardCopy.shuffle(random)
-        cardCopy.shuffle(random)
+        IntRange(1, 3).forEach { cardCopy.shuffle(random) }
         return Stacks.mutable.withAll(cardCopy)
     }
 
