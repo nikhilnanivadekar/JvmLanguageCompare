@@ -1,18 +1,16 @@
 package jvm.language.compare.kotlin.cards
 
-import org.eclipse.collections.api.list.ListIterable
-import org.eclipse.collections.api.multimap.list.MutableListMultimap
 import org.eclipse.collections.api.stack.MutableStack
 import org.eclipse.collections.impl.factory.Stacks
-import org.eclipse.collections.impl.list.mutable.ListAdapter
 import java.util.*
 
 data class KotlinDeckOfCards(
-        val cards: MutableList<Card> = Card.getCards(),
-        val cardsBySuit: MutableListMultimap<Suit, Card> =
-                ListAdapter.adapt(cards)
-                        .groupBy { card -> card.suit }) {
+        val cards: List<Card> = Card.getCards().sorted(),
+        val cardsBySuit: Map<Suit, List<Card>> =
+                cards.groupBy { card -> card.suit }) {
 
+    // Using MutableStack in Kotlin from EC, because as of 10/10/2018 Kotlin does not have a Stack or a Deque.
+    // It uses these data structures from JDK.
     fun shuffle(random: Random): MutableStack<Card> {
         var cardCopy = this.cards.toMutableList()
         cardCopy.shuffle(random)
@@ -38,20 +36,20 @@ data class KotlinDeckOfCards(
         return IntRange(1, hands).map { i -> this.deal(shuffled, cardsPerHand) }
     }
 
-    fun diamonds(): ListIterable<Card> {
+    fun diamonds(): List<Card>? {
         return this.cardsBySuit.get(Suit.DIAMONDS)
     }
 
-    fun hearts(): ListIterable<Card> {
+    fun hearts(): List<Card>? {
         return this.cardsBySuit.get(Suit.HEARTS)
     }
 
-    fun spades(): ListIterable<Card> {
+    fun spades(): List<Card>? {
         return this.cardsBySuit.get(Suit.SPADES)
     }
 
-    fun clubs(): ListIterable<Card> {
-        return this.cardsBySuit.get(Suit.CLUBS)
+    fun clubs(): List<Card>? {
+        return cardsBySuit.get(Suit.CLUBS)
     }
 
     fun countsBySuit(): Map<Suit, Int> {

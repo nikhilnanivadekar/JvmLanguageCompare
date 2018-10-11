@@ -97,7 +97,7 @@ class DeckOfCardsTest {
 
     companion object {
         fun javaKotlinCardEquals(javaCards: ListIterable<jvm.language.compare.java.cards.Card>,
-                                 kotlinCards: Iterable<Card>) {
+                                 kotlinCards: Iterable<Card>?) {
             Assert.assertEquals(javaCards.toString(), kotlinCards.toString())
         }
 

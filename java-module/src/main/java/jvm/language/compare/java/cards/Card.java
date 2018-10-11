@@ -5,9 +5,9 @@ import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+import org.eclipse.collections.api.LazyIterable;
 import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.impl.set.mutable.SetAdapter;
+import org.eclipse.collections.impl.factory.Sets;
 
 public class Card implements Comparable<Card>
 {
@@ -20,11 +20,9 @@ public class Card implements Comparable<Card>
         this.suit = suit;
     }
 
-    public static MutableList<Card> getCards()
+    public static LazyIterable<Card> getCards()
     {
-        return SetAdapter.adapt(EnumSet.allOf(Rank.class))
-                .flatCollect(first -> SetAdapter.adapt(EnumSet.allOf(Suit.class)).collect(second -> ((Function2<Rank, Suit, Card>) Card::new).value(first, second)))
-                .toSortedList();
+        return Sets.cartesianProduct(EnumSet.allOf(Rank.class), EnumSet.allOf(Suit.class), Card::new);
     }
 
     public static Stream<Card> streamCards()

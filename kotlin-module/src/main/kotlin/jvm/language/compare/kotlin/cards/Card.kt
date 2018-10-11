@@ -9,17 +9,14 @@ data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
     }
 
     companion object {
-        fun getCards(): MutableList<Card> {
-            var cards: MutableList<Card> = ArrayList(
-                    Rank.values()
-                            .flatMap { first ->
-                                Suit.values()
-                                        .map { second ->
-                                            Card(first, second)
-                                        }
-                            })
-            cards.sort()
-            return cards
+        fun getCards(): List<Card> {
+            return Rank.values()
+                    .flatMap { first ->
+                        Suit.values()
+                                .map { second ->
+                                    Card(first, second)
+                                }
+                    }
         }
     }
 

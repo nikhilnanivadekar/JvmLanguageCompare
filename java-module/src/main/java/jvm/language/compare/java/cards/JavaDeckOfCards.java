@@ -20,7 +20,7 @@ public class JavaDeckOfCards
 
     public JavaDeckOfCards()
     {
-        this.cards = Card.getCards();
+        this.cards = Card.getCards().toSortedList();
         this.cardsBySuit = this.cards.groupBy(Card::getSuit);
     }
 
