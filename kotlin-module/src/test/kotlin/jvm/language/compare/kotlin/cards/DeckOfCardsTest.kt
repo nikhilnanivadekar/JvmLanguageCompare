@@ -38,11 +38,11 @@ class DeckOfCardsTest {
 
     @Test
     fun deal() {
-        val kotlinShuffle = this.kotlinDeck.shuffle(Random(1))
-        val jdkShuffle = this.jdkDeck.shuffle(Random(1))
+        this.kotlinDeck.shuffle(Random(1))
+        this.jdkDeck.shuffle(Random(1))
 
-        val kotlinHand = this.kotlinDeck.deal(kotlinShuffle, 5)
-        val jdkHand = this.jdkDeck.deal(jdkShuffle, 5)
+        val kotlinHand = this.kotlinDeck.deal(5)
+        val jdkHand = this.jdkDeck.deal(5)
         javaKotlinCardEquals(jdkHand, kotlinHand)
     }
 
@@ -60,11 +60,11 @@ class DeckOfCardsTest {
 
     @Test
     fun dealHands() {
-        val kotlinShuffled = this.kotlinDeck.shuffle(Random(1))
-        val jdkShuffled = this.jdkDeck.shuffle(Random(1))
+        this.kotlinDeck.shuffle(Random(1))
+        this.jdkDeck.shuffle(Random(1))
 
-        val kotlinHands = this.kotlinDeck.dealHands(kotlinShuffled, 5, 5)
-        val jdkHands = this.jdkDeck.dealHands(jdkShuffled, 5, 5)
+        val kotlinHands = this.kotlinDeck.dealHands(5, 5)
+        val jdkHands = this.jdkDeck.dealHands(5, 5)
 
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
 

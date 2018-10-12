@@ -17,7 +17,7 @@ class Card {
         Set<Suit> suits = EnumSet.allOf(Suit.class)
         ranks.collectMany { rank ->
             suits.collect { suit -> new Card(rank, suit) }
-        }.toList()
+        }
     }
 
     Rank getRank() {
@@ -48,6 +48,10 @@ class Card {
         this.rank == rank
     }
 
+    boolean isSameSuit(Suit suit) {
+        this.suit == suit
+    }
+
     boolean equals(Object object) {
         if (this == object) {
             return true
@@ -56,12 +60,12 @@ class Card {
             return false
         }
         Card card = (Card) object
-        this.rank == card.rank && this.suit == card.suit
+        this.isSameRank(card.rank) && this.isSameSuit(card.suit)
     }
 
     int hashCode() {
         int result = 31 + this.rank.hashCode()
-        31 * result + this.suit.hashCode()
+        return 31 * result + this.suit.hashCode()
     }
 
     @Override

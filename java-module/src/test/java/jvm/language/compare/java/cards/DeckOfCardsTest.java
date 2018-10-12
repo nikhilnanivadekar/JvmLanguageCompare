@@ -2,7 +2,6 @@ package jvm.language.compare.java.cards;
 
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.set.MutableSet;
-import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
@@ -56,11 +55,11 @@ public class DeckOfCardsTest
     @Test
     public void deal()
     {
-        MutableStack<Card> ec1Shuffle = this.ecDeck.shuffle(new Random(1));
-        Deque<Card> jdkShuffle = this.jdkDeck.shuffle(new Random(1));
+        this.ecDeck.shuffle(new Random(1));
+        this.jdkDeck.shuffle(new Random(1));
 
-        MutableSet<Card> ec1Hand = this.ecDeck.deal(ec1Shuffle, 5);
-        Set<Card> jdkHand = this.jdkDeck.deal(jdkShuffle, 5);
+        MutableSet<Card> ec1Hand = this.ecDeck.deal(5);
+        Set<Card> jdkHand = this.jdkDeck.deal(5);
 
         Verify.assertSize(5, ec1Hand);
         Assert.assertEquals(ec1Hand, jdkHand);
@@ -78,11 +77,11 @@ public class DeckOfCardsTest
     @Test
     public void dealHands()
     {
-        MutableStack<Card> ecShuffled = this.ecDeck.shuffle(new Random(1));
-        Deque<Card> jdkShuffled = this.jdkDeck.shuffle(new Random(1));
+        this.ecDeck.shuffle(new Random(1));
+        this.jdkDeck.shuffle(new Random(1));
 
-        List<Set<Card>> ec1Hands = this.ecDeck.dealHands(ecShuffled, 5, 5);
-        List<Set<Card>> jdkHands = this.jdkDeck.dealHands(jdkShuffled, 5, 5);
+        List<Set<Card>> ec1Hands = this.ecDeck.dealHands(5, 5);
+        List<Set<Card>> jdkHands = this.jdkDeck.dealHands(5, 5);
 
         Verify.assertSize(5, ec1Hands);
         Assert.assertEquals(ec1Hands, jdkHands);
@@ -117,18 +116,18 @@ public class DeckOfCardsTest
     @Test
     public void dealOneCard()
     {
-        MutableStack<Card> ecShuffled = this.ecDeck.shuffle(new Random(1));
-        Card card1ec = this.ecDeck.dealOneCard(ecShuffled);
-        Verify.assertSize(51, ecShuffled);
-        Card card2ec = this.ecDeck.dealOneCard(ecShuffled);
-        Verify.assertSize(50, ecShuffled);
+        this.ecDeck.shuffle(new Random(1));
+        Card card1ec = this.ecDeck.dealOneCard();
+        Assert.assertEquals(51, this.ecDeck.cardsLeftInDeck());
+        Card card2ec = this.ecDeck.dealOneCard();
+        Assert.assertEquals(50, this.ecDeck.cardsLeftInDeck());
         Assert.assertNotEquals(card1ec, card2ec);
 
-        Deque<Card> jdkShuffled = this.jdkDeck.shuffle(new Random(1));
-        Card card1jdk = this.jdkDeck.dealOneCard(jdkShuffled);
-        Verify.assertSize(51, jdkShuffled);
-        Card card2jdk = this.jdkDeck.dealOneCard(jdkShuffled);
-        Verify.assertSize(50, jdkShuffled);
+        this.jdkDeck.shuffle(new Random(1));
+        Card card1jdk = this.jdkDeck.dealOneCard();
+        Assert.assertEquals(51, this.jdkDeck.cardsLeftInDeck());
+        Card card2jdk = this.jdkDeck.dealOneCard();
+        Assert.assertEquals(50, this.jdkDeck.cardsLeftInDeck());
         Assert.assertNotEquals(card1jdk, card2jdk);
     }
 }

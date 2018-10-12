@@ -7,18 +7,19 @@ import java.util.*
 data class KotlinDeckOfCards(
         val cards: List<Card> = Card.getCards().sorted(),
         val cardsBySuit: Map<Suit, List<Card>> =
-                cards.groupBy { card -> card.suit }) {
+                cards.groupBy { card -> card.suit },
+        var deck: MutableStack<Card> = Stacks.mutable.empty()) {
 
     // Using MutableStack in Kotlin from EC, because as of 10/10/2018 Kotlin does not have a Stack or a Deque.
     // It uses these data structures from JDK.
-    fun shuffle(random: Random): MutableStack<Card> {
+    fun shuffle(random: Random) {
         var cardCopy = this.cards.toMutableList()
         IntRange(1, 3).forEach { cardCopy.shuffle(random) }
-        return Stacks.mutable.withAll(cardCopy)
+        this.deck = Stacks.mutable.withAll(cardCopy)
     }
 
-    fun deal(stack: MutableStack<Card>, count: Int): MutableSet<Card> {
-        var pop = stack.pop(count)
+    fun deal(count: Int): MutableSet<Card> {
+        var pop = this.deck.pop(count)
 
         var outputSet: MutableSet<Card> = mutableSetOf()
         outputSet.addAll(pop)
@@ -26,12 +27,12 @@ data class KotlinDeckOfCards(
     }
 
     fun shuffleAndDeal(random: Random, hands: Int, cardsPerHand: Int): List<MutableSet<Card>> {
-        val shuffled = this.shuffle(random)
-        return this.dealHands(shuffled, hands, cardsPerHand)
+        this.shuffle(random)
+        return this.dealHands(hands, cardsPerHand)
     }
 
-    fun dealHands(shuffled: MutableStack<Card>, hands: Int, cardsPerHand: Int): List<MutableSet<Card>> {
-        return IntRange(1, hands).map { i -> this.deal(shuffled, cardsPerHand) }
+    fun dealHands(hands: Int, cardsPerHand: Int): List<MutableSet<Card>> {
+        return IntRange(1, hands).map { i -> this.deal(cardsPerHand) }
     }
 
     fun diamonds(): List<Card>? {

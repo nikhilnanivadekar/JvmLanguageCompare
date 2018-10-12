@@ -1,13 +1,13 @@
 package jvm.language.compare.java.cards;
 
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.impl.factory.Sets;
+
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Stream;
-
-import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.impl.factory.Sets;
 
 public class Card implements Comparable<Card>
 {
@@ -80,6 +80,10 @@ public class Card implements Comparable<Card>
         return this.rank == rank;
     }
 
+    public boolean isSameSuit(Suit suit) {
+        return this.suit == suit;
+    }
+
     public boolean equals(Object object)
     {
         if (this == object)
@@ -91,7 +95,7 @@ public class Card implements Comparable<Card>
             return false;
         }
         Card card = (Card) object;
-        return this.rank == card.rank && this.suit == card.suit;
+        return this.isSameRank(card.rank) && this.isSameSuit(card.suit);
     }
 
     public int hashCode()

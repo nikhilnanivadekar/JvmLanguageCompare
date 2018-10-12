@@ -9,6 +9,7 @@ class DeckOfCardsTest {
     void allCards() {
         assert 52 == this.groovyDeck.getCards().size()
         println(this.groovyDeck.getCards())
+        assert 52 == new HashSet<>(this.groovyDeck.getCards()).size()
     }
 
     @Test
