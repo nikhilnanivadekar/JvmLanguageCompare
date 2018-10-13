@@ -64,6 +64,8 @@ class DeckOfCardsTest {
         val jdkHands = this.jdkDeck.shuffleAndDeal(Random(1), 5, 5)
         Verify.assertSize(5, kotlinHands)
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
+        kotlinHands.forEach { kotlinHand -> Verify.assertSize(5, kotlinHand) }
+
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
             var jdkHand = SetAdapter.adapt(jdkHands.get(index))
@@ -81,6 +83,7 @@ class DeckOfCardsTest {
 
         Verify.assertSize(5, kotlinHands)
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
+        kotlinHands.forEach { kotlinHand -> Verify.assertSize(5, kotlinHand) }
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
             var jdkHand = SetAdapter.adapt(jdkHands.get(index))
@@ -134,6 +137,8 @@ class DeckOfCardsTest {
         var card2jdk = this.jdkDeck.dealOneCard()
         Assert.assertEquals(50, this.jdkDeck.cardsLeftInDeck())
         Assert.assertNotEquals(card1jdk, card2jdk)
+
+        javaKotlinCardEquals(this.jdkDeck.cards, this.kotlinDeck.cards)
     }
 
     companion object {
