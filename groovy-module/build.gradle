@@ -1,6 +1,8 @@
 apply plugin: 'groovy'
 
 dependencies {
+    compile project(':java-module')
     compile "org.codehaus.groovy:groovy-all:${groovy}"
+    testCompile "org.eclipse.collections:eclipse-collections-testutils:${eclipseCollections}"
     testCompile "junit:junit:${junit}"
 }
