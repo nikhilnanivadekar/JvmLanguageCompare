@@ -26,6 +26,14 @@ data class KotlinDeckOfCards(
         return outputSet
     }
 
+    fun dealOneCard(): Card {
+        return this.deck.pop()
+    }
+
+    fun cardsLeftInDeck(): Int {
+        return this.deck.size()
+    }
+
     fun shuffleAndDeal(random: Random, hands: Int, cardsPerHand: Int): List<MutableSet<Card>> {
         this.shuffle(random)
         return this.dealHands(hands, cardsPerHand)
