@@ -75,6 +75,7 @@ public class DeckOfCardsTest
         List<Set<Card>> jdkHands = this.jdkDeck.shuffleAndDeal(new Random(1), 5, 5);
         List<Set<Card>> streamsHands = this.streamsDeck.shuffleAndDeal(new Random(1), 5, 5);
         Verify.assertSize(5, jdkHands);
+        Verify.assertAllSatisfy(jdkHands, each -> each.size() == 5);
         Assert.assertEquals(jdkHands, streamsHands);
     }
 
@@ -88,6 +89,7 @@ public class DeckOfCardsTest
         List<Set<Card>> streamsHands = this.streamsDeck.dealHands(5, 5);
 
         Verify.assertSize(5, jdkHands);
+        Verify.assertAllSatisfy(jdkHands, each -> each.size() == 5);
         Assert.assertEquals(jdkHands, streamsHands);
     }
 

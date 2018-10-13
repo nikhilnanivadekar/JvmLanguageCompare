@@ -31,7 +31,8 @@ public class JavaDeckOfCards
         this.deck = this.cards.toList()
                 .shuffleThis(random)
                 .shuffleThis(random)
-                .shuffleThis(random).toStack();
+                .shuffleThis(random)
+                .toStack();
     }
 
     public MutableSet<Card> deal(int count)
