@@ -2,12 +2,6 @@ package jvm.language.compare.kotlin.cards
 
 data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
 
-    override fun compareTo(other: Card): Int {
-        return Comparator.comparing<Card, Suit>(Card::suit)
-                .thenBy(Card::rank)
-                .compare(this, other)
-    }
-
     companion object {
         fun getCards(): List<Card> {
             return Rank.values()
@@ -22,5 +16,35 @@ data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
 
     override fun toString(): String {
         return rank.toString() + " of " + suit.toString()
+    }
+
+    override fun compareTo(other: Card): Int {
+        return Comparator.comparing<Card, Suit>(Card::suit)
+                .thenBy(Card::rank)
+                .compare(this, other)
+    }
+
+    fun isDiamonds(): Boolean {
+        return this.suit == Suit.DIAMONDS
+    }
+
+    fun isHearts(): Boolean {
+        return this.suit == Suit.HEARTS
+    }
+
+    fun isSpades(): Boolean {
+        return this.suit == Suit.SPADES
+    }
+
+    fun isClubs(): Boolean {
+        return this.suit == Suit.CLUBS
+    }
+
+    fun isSameRank(rank: Rank): Boolean {
+        return this.rank == rank
+    }
+
+    fun isSameSuit(suit: Suit): Boolean {
+        return this.suit == suit
     }
 }

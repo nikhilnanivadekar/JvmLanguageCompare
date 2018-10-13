@@ -3,6 +3,7 @@ package jvm.language.compare.kotlin.cards
 import jvm.language.compare.java.cards.JavaDeckOfCards
 import org.eclipse.collections.api.list.ListIterable
 import org.eclipse.collections.impl.set.mutable.SetAdapter
+import org.eclipse.collections.impl.test.Verify
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -13,26 +14,35 @@ class DeckOfCardsTest {
 
     @Test
     fun allCards() {
+        Verify.assertSize(52, this.kotlinDeck.cards)
         javaKotlinCardEquals(this.jdkDeck.cards, this.kotlinDeck.cards)
     }
 
     @Test
     fun diamonds() {
+        Verify.assertSize(13, this.kotlinDeck.diamonds())
+        Verify.assertAllSatisfy(this.kotlinDeck.diamonds(), Card::isDiamonds)
         javaKotlinCardEquals(this.jdkDeck.diamonds(), this.kotlinDeck.diamonds())
     }
 
     @Test
     fun hearts() {
+        Verify.assertSize(13, this.kotlinDeck.hearts())
+        Verify.assertAllSatisfy(this.kotlinDeck.hearts(), Card::isHearts)
         javaKotlinCardEquals(this.jdkDeck.hearts(), this.kotlinDeck.hearts())
     }
 
     @Test
     fun spades() {
+        Verify.assertSize(13, this.kotlinDeck.spades())
+        Verify.assertAllSatisfy(this.kotlinDeck.spades(), Card::isSpades)
         javaKotlinCardEquals(this.jdkDeck.spades(), this.kotlinDeck.spades())
     }
 
     @Test
     fun clubs() {
+        Verify.assertSize(13, this.kotlinDeck.clubs())
+        Verify.assertAllSatisfy(this.kotlinDeck.clubs(), Card::isClubs)
         javaKotlinCardEquals(this.jdkDeck.clubs(), this.kotlinDeck.clubs())
     }
 
@@ -43,6 +53,8 @@ class DeckOfCardsTest {
 
         val kotlinHand = this.kotlinDeck.deal(5)
         val jdkHand = this.jdkDeck.deal(5)
+
+        Verify.assertSize(5, kotlinHand)
         javaKotlinCardEquals(jdkHand, kotlinHand)
     }
 
@@ -50,6 +62,7 @@ class DeckOfCardsTest {
     fun shuffleAndDealHands() {
         val kotlinHands = this.kotlinDeck.shuffleAndDeal(Random(1), 5, 5)
         val jdkHands = this.jdkDeck.shuffleAndDeal(Random(1), 5, 5)
+        Verify.assertSize(5, kotlinHands)
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
@@ -66,6 +79,7 @@ class DeckOfCardsTest {
         val kotlinHands = this.kotlinDeck.dealHands(5, 5)
         val jdkHands = this.jdkDeck.dealHands(5, 5)
 
+        Verify.assertSize(5, kotlinHands)
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
@@ -82,17 +96,44 @@ class DeckOfCardsTest {
         javaKotlinCardEquals(
                 jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.CLUBS),
                 kotlinCardsBySuit.get(Suit.CLUBS))
+        javaKotlinCardEquals(
+                jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.DIAMONDS),
+                kotlinCardsBySuit.get(Suit.DIAMONDS))
+        javaKotlinCardEquals(
+                jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.HEARTS),
+                kotlinCardsBySuit.get(Suit.HEARTS))
+        javaKotlinCardEquals(
+                jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.SPADES),
+                kotlinCardsBySuit.get(Suit.SPADES))
     }
 
     @Test
     fun countsBySuit() {
-        Assert.assertEquals(13,
-                this.kotlinDeck.countsBySuit().get(Suit.CLUBS))
+        Verify.assertAllSatisfy(Suit.values().asIterable()) { suit -> this.kotlinDeck.countsBySuit().get(suit) == 13 }
+        Verify.assertAllSatisfy(jvm.language.compare.java.cards.Suit.values().asIterable()) { suit -> this.jdkDeck.countsBySuit().occurrencesOf(suit) == 13 }
     }
 
     @Test
     fun countsByRank() {
-        Assert.assertEquals(4, this.kotlinDeck.countsByRank().get(Rank.SEVEN))
+        Verify.assertAllSatisfy(Rank.values().asIterable()) { rank -> this.kotlinDeck.countsByRank().get(rank) == 4 }
+        Verify.assertAllSatisfy(jvm.language.compare.java.cards.Rank.values().asIterable()) { rank -> this.jdkDeck.countsByRank().occurrencesOf(rank) == 4 }
+    }
+
+    @Test
+    fun dealOneCard() {
+        this.kotlinDeck.shuffle(Random(1))
+        var card1kotlin = this.kotlinDeck.dealOneCard()
+        Assert.assertEquals(51, this.kotlinDeck.cardsLeftInDeck())
+        var card2kotlin = this.kotlinDeck.dealOneCard()
+        Assert.assertEquals(50, this.kotlinDeck.cardsLeftInDeck())
+        Assert.assertNotEquals(card1kotlin, card2kotlin)
+
+        this.jdkDeck.shuffle(Random(1))
+        var card1jdk = this.jdkDeck.dealOneCard()
+        Assert.assertEquals(51, this.jdkDeck.cardsLeftInDeck())
+        var card2jdk = this.jdkDeck.dealOneCard()
+        Assert.assertEquals(50, this.jdkDeck.cardsLeftInDeck())
+        Assert.assertNotEquals(card1jdk, card2jdk)
     }
 
     companion object {
@@ -111,5 +152,4 @@ class DeckOfCardsTest {
             Assert.assertEquals(javaSet, kotlinSet)
         }
     }
-
 }

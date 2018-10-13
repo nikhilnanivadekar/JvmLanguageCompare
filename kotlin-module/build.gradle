@@ -9,6 +9,7 @@ dependencies {
     compile "org.eclipse.collections:eclipse-collections-api:${eclipseCollections}"
     compile "org.eclipse.collections:eclipse-collections:${eclipseCollections}"
     testCompile "junit:junit:${junit}"
+    testCompile "org.eclipse.collections:eclipse-collections-testutils:${eclipseCollections}"
 }
 
 compileKotlin {
