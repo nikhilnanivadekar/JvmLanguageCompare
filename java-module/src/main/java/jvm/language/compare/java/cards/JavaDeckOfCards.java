@@ -1,5 +1,9 @@
 package jvm.language.compare.java.cards;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
@@ -9,10 +13,6 @@ import org.eclipse.collections.api.stack.MutableStack;
 import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
-
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
 
 public class JavaDeckOfCards
 {
@@ -44,7 +44,8 @@ public class JavaDeckOfCards
         return this.deck.pop();
     }
 
-    public int cardsLeftInDeck() {
+    public int cardsLeftInDeck()
+    {
         return this.deck.size();
     }
 
