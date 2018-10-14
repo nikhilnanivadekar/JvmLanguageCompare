@@ -1,6 +1,7 @@
 apply plugin: 'scala'
 
 dependencies {
+    compile project(':java-module')
     compile "org.scala-lang:scala-library:${scala}"
     testCompile "org.scalatest:scalatest_2.12:${scalaTest}"
     testCompile "junit:junit:${junit}"
