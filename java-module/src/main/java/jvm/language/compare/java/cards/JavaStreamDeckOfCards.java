@@ -12,7 +12,8 @@ public class JavaStreamDeckOfCards
             .collect(Collectors.groupingBy(Card::getSuit));
     private Deque<Card> deck = new ArrayDeque<>();
 
-    public JavaStreamDeckOfCards() {
+    public JavaStreamDeckOfCards()
+    {
     }
 
     public void shuffle(Random random)
@@ -37,7 +38,8 @@ public class JavaStreamDeckOfCards
         return this.deck.pop();
     }
 
-    public int cardsLeftInDeck() {
+    public int cardsLeftInDeck()
+    {
         return this.deck.size();
     }
 
