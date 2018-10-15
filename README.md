@@ -8,7 +8,7 @@ JVM.Languages.Compare (Java, Kotlin, Groovy, Scala) Talk Repo
    - [Getters and Setters](#getters-and-setters)
    - [Enums](#enums)
    - [Data Classes](#data-classes)
-   - [Collections: List, Set, Map](#collections:-list,-set,-map)
+   - [Collections: List, Set, Map](#collections-list-set-map)
    - [Ranges](#ranges)
    - [Extending Data Classes](#extending-data-classes)
    - [Transform method on Set](#transform-method-on-set)
