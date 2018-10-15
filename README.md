@@ -3,16 +3,16 @@ JVM.Languages.Compare (Java, Kotlin, Groovy, Scala) Talk Repo
 
 # Table of Contents
 1. [Kotlin](#Kotlin)
-   - [Constructors](#Constructors)
-   - [Properties and Fields](#Properties and Fields)
-   - [Getters and Setters](#Getters and Setters)
-   - [Enums](#Enums)
-   - [Data Classes](#Data Classes)
-   - [Collections: List, Set, Map](#Collections:List;Set;Map)
-   - [Ranges](#Ranges)
-   - [Extending Data Classes](#Extending Data Classes)
-   - [Transform method on Set](#Transform method on Set)
-   - [Assertions with Java](#Assertions with Java)
+   - [Constructors](#constructors)
+   - [Properties and Fields](#properties-and-fields)
+   - [Getters and Setters](#getters-and-setters)
+   - [Enums](#enums)
+   - [Data Classes](#data-classes)
+   - [Collections: List, Set, Map](#collections:-list,-set,-map)
+   - [Ranges](#ranges)
+   - [Extending Data Classes](#extending-data-classes)
+   - [Transform method on Set](#transform-method-on-set)
+   - [Assertions with Java](#assertions-with-java)
 
 ## Kotlin
 
@@ -49,7 +49,7 @@ In Kotlin, this is called a data class and is marked as data:
 - componentN() functions corresponding to the properties in their order of declaration;
 - copy() function.
 
-### Collections:List;Set;Map
+### Collections: List, Set, Map
 Unlike many languages, Kotlin distinguishes between mutable and immutable collections (lists, sets, maps, etc). 
 Precise control over exactly when collections can be edited is useful for eliminating bugs, and for designing good APIs.
 It is important to understand up front the difference between a read-only view of a mutable collection, and an actually immutable collection. 
