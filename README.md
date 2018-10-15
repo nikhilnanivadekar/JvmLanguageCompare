@@ -80,3 +80,32 @@ This has to be done using `toString()` because in Kotlin you *cannot* extend a c
 ### Kotlin References: 
 - Kotlin docs: https://kotlinlang.org/docs/reference/
 - StackOverflow: https://stackoverflow.com/a/26467380
+
+
+## Groovy
+
+### Overview
+- Groovy is a dynamic JVM language which works very well with Java.
+- Now an Apache project.
+
+### Collections
+- Working with Collections - http://docs.groovy-lang.org/next/html/documentation/working-with-collections.html
+
+### References
+- Differences with Java - http://groovy-lang.org/differences.html
+- Style Guide: http://groovy-lang.org/style-guide.html
+
+
+## Scala
+
+### Overview
+- Scala is a statically typed JVM language which combines OO and Functional features.
+
+### Collections
+- Mutable and Immutable - https://docs.scala-lang.org/overviews/collections/overview.html
+
+### References
+- Documentation: https://docs.scala-lang.org/
+- Scala for Java Programmers - https://docs.scala-lang.org/tutorials/scala-for-java-programmers.html
+
+
