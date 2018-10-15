@@ -6,16 +6,13 @@ import java.util.stream.IntStream;
 
 public class JavaStreamDeckOfCards
 {
-    private List<Card> cards;
-    private Map<Suit, List<Card>> cardsBySuit;
+    private List<Card> cards = Card.streamCards().sorted()
+            .collect(Collectors.toList());
+    private Map<Suit, List<Card>> cardsBySuit = this.cards.stream()
+            .collect(Collectors.groupingBy(Card::getSuit));
     private Deque<Card> deck = new ArrayDeque<>();
 
-    public JavaStreamDeckOfCards()
-    {
-        this.cards = Card.streamCards().sorted()
-                .collect(Collectors.toList());
-        this.cardsBySuit = this.cards.stream()
-                .collect(Collectors.groupingBy(Card::getSuit));
+    public JavaStreamDeckOfCards() {
     }
 
     public void shuffle(Random random)

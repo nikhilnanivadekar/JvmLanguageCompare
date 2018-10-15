@@ -47,4 +47,19 @@ data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
     fun isSameSuit(suit: Suit): Boolean {
         return this.suit == suit
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) {
+            return true
+        }
+        if (other is Card) {
+            val card = other as Card?
+            return this.isSameSuit(card!!.suit) && this.isSameRank(card.rank)
+        }
+        return false
+    }
+
+    override fun hashCode(): Int {
+        return 31 * rank.hashCode() + suit.hashCode()
+    }
 }

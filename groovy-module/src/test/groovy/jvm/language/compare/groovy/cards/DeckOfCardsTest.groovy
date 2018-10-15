@@ -3,6 +3,7 @@ package jvm.language.compare.groovy.cards
 import jvm.language.compare.java.cards.JavaDeckOfCards
 import org.eclipse.collections.api.list.ListIterable
 import org.eclipse.collections.api.set.MutableSet
+import org.eclipse.collections.impl.factory.Sets
 import org.eclipse.collections.impl.set.mutable.SetAdapter
 import org.eclipse.collections.impl.utility.Iterate
 import org.junit.Assert
@@ -17,7 +18,7 @@ class DeckOfCardsTest {
     @Test
     void allCards() {
         assert 52 == this.groovyDeck.getCards().size()
-        assert 52 == new HashSet<>(this.groovyDeck.getCards()).size()
+        assert 52 == Sets.mutable.withAll(this.groovyDeck.getCards()).size()
         javaGroovyCardEquals(this.jdkDeck.cards, this.groovyDeck.cards)
     }
 

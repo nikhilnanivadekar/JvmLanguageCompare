@@ -6,7 +6,6 @@ import org.eclipse.collections.impl.set.mutable.SetAdapter
 import org.eclipse.collections.impl.test.Verify
 import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 class DeckOfCardsTest {
     private val kotlinDeck = KotlinDeckOfCards()
@@ -15,6 +14,7 @@ class DeckOfCardsTest {
     @Test
     fun allCards() {
         Verify.assertSize(52, this.kotlinDeck.cards)
+        Verify.assertSize(52, HashSet(this.kotlinDeck.cards))
         javaKotlinCardEquals(this.jdkDeck.cards, this.kotlinDeck.cards)
     }
 
@@ -48,8 +48,8 @@ class DeckOfCardsTest {
 
     @Test
     fun deal() {
-        this.kotlinDeck.shuffle(Random(1))
-        this.jdkDeck.shuffle(Random(1))
+        this.kotlinDeck.shuffle(java.util.Random(1))
+        this.jdkDeck.shuffle(java.util.Random(1))
 
         val kotlinHand = this.kotlinDeck.deal(5)
         val jdkHand = this.jdkDeck.deal(5)
@@ -60,8 +60,8 @@ class DeckOfCardsTest {
 
     @Test
     fun shuffleAndDealHands() {
-        val kotlinHands = this.kotlinDeck.shuffleAndDeal(Random(1), 5, 5)
-        val jdkHands = this.jdkDeck.shuffleAndDeal(Random(1), 5, 5)
+        val kotlinHands = this.kotlinDeck.shuffleAndDeal(java.util.Random(1), 5, 5)
+        val jdkHands = this.jdkDeck.shuffleAndDeal(java.util.Random(1), 5, 5)
         Verify.assertSize(5, kotlinHands)
         Assert.assertEquals(kotlinHands.size, jdkHands.size)
         kotlinHands.forEach { kotlinHand -> Verify.assertSize(5, kotlinHand) }
@@ -75,8 +75,8 @@ class DeckOfCardsTest {
 
     @Test
     fun dealHands() {
-        this.kotlinDeck.shuffle(Random(1))
-        this.jdkDeck.shuffle(Random(1))
+        this.kotlinDeck.shuffle(java.util.Random(1))
+        this.jdkDeck.shuffle(java.util.Random(1))
 
         val kotlinHands = this.kotlinDeck.dealHands(5, 5)
         val jdkHands = this.jdkDeck.dealHands(5, 5)
@@ -124,14 +124,14 @@ class DeckOfCardsTest {
 
     @Test
     fun dealOneCard() {
-        this.kotlinDeck.shuffle(Random(1))
+        this.kotlinDeck.shuffle(java.util.Random(1))
         var card1kotlin = this.kotlinDeck.dealOneCard()
         Assert.assertEquals(51, this.kotlinDeck.cardsLeftInDeck())
         var card2kotlin = this.kotlinDeck.dealOneCard()
         Assert.assertEquals(50, this.kotlinDeck.cardsLeftInDeck())
         Assert.assertNotEquals(card1kotlin, card2kotlin)
 
-        this.jdkDeck.shuffle(Random(1))
+        this.jdkDeck.shuffle(java.util.Random(1))
         var card1jdk = this.jdkDeck.dealOneCard()
         Assert.assertEquals(51, this.jdkDeck.cardsLeftInDeck())
         var card2jdk = this.jdkDeck.dealOneCard()

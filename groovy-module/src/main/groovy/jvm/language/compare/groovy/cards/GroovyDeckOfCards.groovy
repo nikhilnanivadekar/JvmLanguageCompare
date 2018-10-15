@@ -1,13 +1,11 @@
 package jvm.language.compare.groovy.cards
 
 class GroovyDeckOfCards {
-    private List<Card> cards
-    private Map<Suit, List<Card>> cardsBySuit
+    private List<Card> cards = Card.cards().sort()
+    private Map<Suit, List<Card>> cardsBySuit = this.cards.groupBy { it.getSuit() }
     private List<Card> deck = new ArrayList<>()
 
     GroovyDeckOfCards() {
-        this.cards = Card.cards().sort()
-        this.cardsBySuit = this.cards.groupBy { it.getSuit() }
     }
 
     void shuffle(Random random) {

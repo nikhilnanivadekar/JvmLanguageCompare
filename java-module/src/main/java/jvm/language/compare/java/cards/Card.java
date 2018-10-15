@@ -84,25 +84,21 @@ public class Card implements Comparable<Card>
         return this.suit == suit;
     }
 
-    public boolean equals(Object object)
-    {
-        if (this == object)
-        {
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
             return true;
         }
-        if (!(object instanceof Card))
-        {
-            return false;
+        if (object instanceof Card) {
+            Card card = (Card) object;
+            return this.isSameSuit(card.suit) && this.isSameRank(card.rank);
         }
-        Card card = (Card) object;
-        return this.isSameRank(card.rank) && this.isSameSuit(card.suit);
+        return false;
     }
 
-    public int hashCode()
-    {
-        int result = 31 + this.rank.hashCode();
-        result = 31 * result + this.suit.hashCode();
-        return result;
+    @Override
+    public int hashCode() {
+        return 31 * rank.hashCode() + suit.hashCode();
     }
 
     @Override

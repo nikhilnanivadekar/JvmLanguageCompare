@@ -52,20 +52,17 @@ class Card {
         this.suit == suit
     }
 
-    boolean equals(Object object) {
-        if (this == object) {
-            return true
-        }
-        if (!(object instanceof Card)) {
-            return false
-        }
+    boolean equals(object) {
+        if (this.is(object)) return true
+        if (this.getClass() != object.class) return false
+
         Card card = (Card) object
-        this.isSameRank(card.rank) && this.isSameSuit(card.suit)
+
+        this.isSameSuit(card.suit) && this.isSameRank(card.rank)
     }
 
     int hashCode() {
-        int result = 31 + this.rank.hashCode()
-        return 31 * result + this.suit.hashCode()
+        31 * rank.hashCode() + suit.hashCode()
     }
 
     @Override

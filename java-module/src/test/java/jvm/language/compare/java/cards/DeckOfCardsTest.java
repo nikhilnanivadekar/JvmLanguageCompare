@@ -1,16 +1,12 @@
 package jvm.language.compare.java.cards;
 
-import java.util.EnumSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
-
 import org.eclipse.collections.api.multimap.list.ListMultimap;
 import org.eclipse.collections.api.set.MutableSet;
 import org.eclipse.collections.impl.test.Verify;
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.*;
 
 public class DeckOfCardsTest
 {
@@ -21,6 +17,7 @@ public class DeckOfCardsTest
     public void allCards()
     {
         Verify.assertSize(52, this.jdkDeck.getCards());
+        Verify.assertSize(52, this.jdkDeck.getCards().toSet());
         Assert.assertEquals(this.jdkDeck.getCards(), this.streamsDeck.getCards());
     }
 

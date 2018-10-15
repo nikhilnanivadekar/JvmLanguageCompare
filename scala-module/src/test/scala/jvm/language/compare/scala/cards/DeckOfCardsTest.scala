@@ -16,6 +16,7 @@ class DeckOfCardsTest {
 
   @Test def allCards(): Unit = {
     assert(52 == this.scalaDeck.getCards.size)
+    assert(52 == this.scalaDeck.getCards.toSet.size)
     javaScalaCardEquals(this.jdkDeck.getCards, this.scalaDeck.cards)
   }
 

@@ -1,9 +1,5 @@
 package jvm.language.compare.java.cards;
 
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
-
 import org.eclipse.collections.api.bag.Bag;
 import org.eclipse.collections.api.list.ListIterable;
 import org.eclipse.collections.api.list.MutableList;
@@ -14,16 +10,18 @@ import org.eclipse.collections.impl.factory.Lists;
 import org.eclipse.collections.impl.factory.Stacks;
 import org.eclipse.collections.impl.list.primitive.IntInterval;
 
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
 public class JavaDeckOfCards
 {
-    private MutableList<Card> cards;
-    private ListMultimap<Suit, Card> cardsBySuit;
+    private MutableList<Card> cards = Card.getCards().toSortedList();
+    private ListMultimap<Suit, Card> cardsBySuit = this.cards.groupBy(Card::getSuit);
     private MutableStack<Card> deck = Stacks.mutable.empty();
 
     public JavaDeckOfCards()
     {
-        this.cards = Card.getCards().toSortedList();
-        this.cardsBySuit = this.cards.groupBy(Card::getSuit);
     }
 
     public void shuffle(Random random)

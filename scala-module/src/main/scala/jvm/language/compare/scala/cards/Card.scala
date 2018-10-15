@@ -23,6 +23,8 @@ class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
 
   def isSameRank(rank: Rank): Boolean = this.rank eq rank
 
+  def isSameSuit(rank: Suit): Boolean = this.suit eq suit
+
   override def compare(that: Card): Int = (this.suit, this.rank) compare (that.suit, that.rank)
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[Card]
@@ -30,15 +32,12 @@ class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
   override def equals(other: Any): Boolean = other match {
     case that: Card =>
       (that canEqual this) &&
-        rank == that.rank &&
-        suit == that.suit
+        this.isSameSuit(that.suit) &&
+        this.isSameRank(that.rank)
     case _ => false
   }
 
-  override def hashCode(): Int = {
-    val state = Seq(rank, suit)
-    state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
-  }
+  override def hashCode(): Int = 31 * rank.hashCode + suit.hashCode
 
   override def toString: String = this.rank + " of " + this.suit
 }
