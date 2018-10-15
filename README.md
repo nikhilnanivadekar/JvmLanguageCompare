@@ -78,5 +78,5 @@ In the code the assertions are done after calling `toString()` so that we can as
 This has to be done using `toString()` because in Kotlin you *cannot* extend a class and implement an interface at the same time.
 
 ### Kotlin References: 
-Kotlin docs and StackOverflow (link pasted)
-
+- Kotlin docs: https://kotlinlang.org/docs/reference/
+- StackOverflow: https://stackoverflow.com/a/26467380
