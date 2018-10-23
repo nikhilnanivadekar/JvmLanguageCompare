@@ -1,17 +1,23 @@
 JVM Language Compare: Java, Kotlin, Groovy, Scala
 -------------------------------
 
-* **space:** next page
-* **down arrow:** next page in the current section
-* **right arrow:** next section
-
-
 Agenda
 ------
- * Topic 1
- * Topic 2
- * Topic 3
- 
+
+1. Domain Diagram 
+2. Properties and Fields
+3. Constructors
+4. Getters and Setters
+5. Enums
+6. Ranges
+7. Equals and HashCode
+8. sorting
+9. groupBy
+
+Domain Diagram
+--------------
+
+
 Properties and Fields
 ---------------------
 * Java
@@ -211,10 +217,6 @@ Rank.values.flatMap(rank => Suit.values.map(suit => new Card(rank, suit)))
 ```
 
 
-Collections
------------
-TBD
-
 Ranges
 ------
 * Java
@@ -333,4 +335,71 @@ override def hashCode(): Int = {
   val state = Seq(rank, suit)
   state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)
 }
+```
+
+sorting
+-------
+* Java
+```java
+MutableList<Card> cards = Card.getCards().toSortedList();
+```
+```java
+@Override
+public int compareTo(Card o)
+{
+    return Comparator.comparing(Card::getSuit)
+            .thenComparing(Card::getRank)
+            .compare(this, o);
+}
+```
+
+* Kotlin
+```kotlin
+cards: List<Card> = Card.getCards().sorted()
+```
+```kotlin
+override fun compareTo(other: Card): Int {
+    return Comparator.comparing<Card, Suit>(Card::suit)
+            .thenBy(Card::rank)
+            .compare(this, other)
+}
+```
+
+* Groovy
+```groovy
+List<Card> cards = Card.cards().sort()
+```
+```groovy
+@Sortable(includes = ['suit', 'rank'])
+```
+
+* Scala
+```scala
+cards: Seq[Card] = Card.getCards.toBuffer.sorted
+```
+```scala
+override def compare(that: Card): Int = 
+    (this.suit, this.rank) compare (that.suit, that.rank)
+```
+
+groupBy
+-------
+* Java
+```java
+ListMultimap<Suit, Card> cardsBySuit = this.cards.groupBy(Card::getSuit);
+```
+
+* Kotlin
+```kotlin
+cardsBySuit: Map<Suit, List<Card>> = cards.groupBy { card -> card.suit }
+```
+
+* Groovy
+```groovy
+Map<Suit, List<Card>> cardsBySuit = this.cards.groupBy { it.getSuit() }
+```
+
+* Scala
+```scala
+cardsBySuit: Map[Suit, Seq[Card]] = this.cards.groupBy(_.suit)
 ```

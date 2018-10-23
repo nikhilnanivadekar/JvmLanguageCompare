@@ -25,7 +25,8 @@ class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
 
   def isSameSuit(rank: Suit): Boolean = this.suit eq suit
 
-  override def compare(that: Card): Int = (this.suit, this.rank) compare (that.suit, that.rank)
+  override def compare(that: Card): Int =
+    (this.suit, this.rank) compare(that.suit, that.rank)
 
   def canEqual(other: Any): Boolean = other.isInstanceOf[Card]
 

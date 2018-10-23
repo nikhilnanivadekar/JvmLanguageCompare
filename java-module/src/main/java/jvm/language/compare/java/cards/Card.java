@@ -1,13 +1,13 @@
 package jvm.language.compare.java.cards;
 
-import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.impl.factory.Sets;
-
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Stream;
+
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.impl.factory.Sets;
 
 public class Card implements Comparable<Card>
 {
@@ -52,7 +52,9 @@ public class Card implements Comparable<Card>
     @Override
     public int compareTo(Card o)
     {
-        return Comparator.comparing(Card::getSuit).thenComparing(Card::getRank).compare(this, o);
+        return Comparator.comparing(Card::getSuit)
+                .thenComparing(Card::getRank)
+                .compare(this, o);
     }
 
     public boolean isDiamonds()
