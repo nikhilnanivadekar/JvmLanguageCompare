@@ -68,7 +68,7 @@ class DeckOfCardsTest {
 
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
-            var jdkHand = SetAdapter.adapt(jdkHands.get(index))
+            val jdkHand = SetAdapter.adapt(jdkHands.get(index))
             javaKotlinCardEquals(jdkHand, kotlinHand)
         }
     }
@@ -86,7 +86,7 @@ class DeckOfCardsTest {
         kotlinHands.forEach { kotlinHand -> Verify.assertSize(5, kotlinHand) }
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
-            var jdkHand = SetAdapter.adapt(jdkHands.get(index))
+            val jdkHand = SetAdapter.adapt(jdkHands.get(index))
             javaKotlinCardEquals(jdkHand, kotlinHand)
         }
     }
@@ -125,16 +125,16 @@ class DeckOfCardsTest {
     @Test
     fun dealOneCard() {
         this.kotlinDeck.shuffle(java.util.Random(1))
-        var card1kotlin = this.kotlinDeck.dealOneCard()
+        val card1kotlin = this.kotlinDeck.dealOneCard()
         Assert.assertEquals(51, this.kotlinDeck.cardsLeftInDeck())
-        var card2kotlin = this.kotlinDeck.dealOneCard()
+        val card2kotlin = this.kotlinDeck.dealOneCard()
         Assert.assertEquals(50, this.kotlinDeck.cardsLeftInDeck())
         Assert.assertNotEquals(card1kotlin, card2kotlin)
 
         this.jdkDeck.shuffle(java.util.Random(1))
-        var card1jdk = this.jdkDeck.dealOneCard()
+        val card1jdk = this.jdkDeck.dealOneCard()
         Assert.assertEquals(51, this.jdkDeck.cardsLeftInDeck())
-        var card2jdk = this.jdkDeck.dealOneCard()
+        val card2jdk = this.jdkDeck.dealOneCard()
         Assert.assertEquals(50, this.jdkDeck.cardsLeftInDeck())
         Assert.assertNotEquals(card1jdk, card2jdk)
 
@@ -152,8 +152,8 @@ class DeckOfCardsTest {
             Assert.assertEquals(javaCards.size, kotlinCards.size)
 
             // Must collect to Set as order is not guaranteed so, the toString() should be called on each element.
-            var javaSet = javaCards.collect { card -> card.toString() }
-            var kotlinSet = kotlinCards.map { card -> card.toString() }.toSet()
+            val javaSet = javaCards.collect { card -> card.toString() }
+            val kotlinSet = kotlinCards.map { card -> card.toString() }.toSet()
             Assert.assertEquals(javaSet, kotlinSet)
         }
     }
