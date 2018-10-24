@@ -4,8 +4,8 @@ import groovy.transform.Sortable
 
 @Sortable(includes = ['suit', 'rank'])
 class Card {
-    private final Rank rank
-    private final Suit suit
+    final Rank rank
+    final Suit suit
 
     Card(Rank rank, Suit suit) {
         this.rank = rank
@@ -18,14 +18,6 @@ class Card {
         ranks.collectMany { rank ->
             suits.collect { suit -> new Card(rank, suit) }
         }
-    }
-
-    Rank getRank() {
-        this.rank
-    }
-
-    Suit getSuit() {
-        this.suit
     }
 
     boolean isDiamonds() {
