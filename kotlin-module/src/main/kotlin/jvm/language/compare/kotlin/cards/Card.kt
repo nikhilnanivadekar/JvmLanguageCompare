@@ -6,10 +6,9 @@ data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
         fun getCards(): List<Card> {
             return Rank.values()
                     .flatMap { first ->
-                        Suit.values()
-                                .map { second ->
-                                    Card(first, second)
-                                }
+                        Suit.values().map { second ->
+                            Card(first, second)
+                        }
                     }
         }
     }

@@ -11,8 +11,9 @@ Agenda
 5. Enums
 6. Ranges
 7. Equals and HashCode
-8. sorting
-9. groupBy
+8. Cartesian Product
+9. Sorting
+10. Group-By
 
 Domain Diagram
 --------------
@@ -337,7 +338,44 @@ override def hashCode(): Int = {
 }
 ```
 
-sorting
+Cartesian Product
+-----------------
+* Java
+```java
+Sets.cartesianProduct(
+    EnumSet.allOf(Rank.class), 
+    EnumSet.allOf(Suit.class), 
+    Card::new);
+```
+
+* Kotlin
+```kotlin
+Rank.values()
+ .flatMap { first ->
+     Suit.values().map { second ->
+         Card(first, second)
+     }
+}
+```
+
+* Groovy
+```groovy
+Set<Rank> ranks = EnumSet.allOf(Rank.class)
+Set<Suit> suits = EnumSet.allOf(Suit.class)
+ranks.collectMany { rank ->
+    suits.collect { suit -> new Card(rank, suit) }
+}
+```
+
+* Scala
+```scala
+Rank.values
+  .flatMap(rank => 
+    Suit.values.map(suit => 
+      new Card(rank, suit)))
+```
+
+Sorting
 -------
 * Java
 ```java
@@ -382,7 +420,7 @@ override def compare(that: Card): Int =
     (this.suit, this.rank) compare (that.suit, that.rank)
 ```
 
-groupBy
+Group-By
 -------
 * Java
 ```java

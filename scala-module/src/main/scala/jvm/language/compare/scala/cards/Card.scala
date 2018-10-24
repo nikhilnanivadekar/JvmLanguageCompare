@@ -5,7 +5,10 @@ import jvm.language.compare.scala.cards.Suit.Suit
 
 object Card {
   def getCards: Set[Card] =
-    Rank.values.flatMap(rank => Suit.values.map(suit => new Card(rank, suit)))
+    Rank.values
+      .flatMap(rank =>
+        Suit.values.map(suit =>
+          new Card(rank, suit)))
 }
 
 class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
