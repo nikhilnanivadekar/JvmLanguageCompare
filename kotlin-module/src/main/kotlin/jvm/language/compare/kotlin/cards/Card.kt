@@ -1,49 +1,31 @@
 package jvm.language.compare.kotlin.cards
 
-data class Card constructor(val rank: Rank, val suit: Suit) : Comparable<Card> {
+data class Card (val rank: Rank, val suit: Suit) : Comparable<Card> {
 
     companion object {
-        fun getCards(): List<Card> {
-            return Rank.values()
-                    .flatMap { first ->
-                        Suit.values().map { second ->
-                            Card(first, second)
-                        }
+        fun getCards() = Rank.values()
+                .flatMap { first ->
+                    Suit.values().map {
+                        Card(first, it)
                     }
-        }
+                }
     }
 
-    override fun toString(): String {
-        return rank.toString() + " of " + suit.toString()
-    }
+    override fun toString() = rank.toString() + " of " + suit.toString()
 
-    override fun compareTo(other: Card): Int {
-        return Comparator.comparing<Card, Suit>(Card::suit)
+    override fun compareTo(other: Card) = Comparator.comparing<Card, Suit>(Card::suit)
                 .thenBy(Card::rank)
                 .compare(this, other)
-    }
 
-    fun isDiamonds(): Boolean {
-        return this.suit == Suit.DIAMONDS
-    }
+    fun isDiamonds() = this.suit == Suit.DIAMONDS
 
-    fun isHearts(): Boolean {
-        return this.suit == Suit.HEARTS
-    }
+    fun isHearts() = this.suit == Suit.HEARTS
 
-    fun isSpades(): Boolean {
-        return this.suit == Suit.SPADES
-    }
+    fun isSpades() = this.suit == Suit.SPADES
 
-    fun isClubs(): Boolean {
-        return this.suit == Suit.CLUBS
-    }
+    fun isClubs() = this.suit == Suit.CLUBS
 
-    fun isSameRank(rank: Rank): Boolean {
-        return this.rank == rank
-    }
+    fun isSameRank(rank: Rank) = this.rank == rank
 
-    fun isSameSuit(suit: Suit): Boolean {
-        return this.suit == suit
-    }
+    fun isSameSuit(suit: Suit) = this.suit == suit
 }
