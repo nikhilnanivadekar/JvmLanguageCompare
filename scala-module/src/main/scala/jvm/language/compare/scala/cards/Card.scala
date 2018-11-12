@@ -11,7 +11,10 @@ object Card {
           new Card(rank, suit)))
 }
 
-class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
+// case classes are very frequently used because they are so convienient.
+// case clases have hashCode, equals and toString methods all defined.
+// Kotlin borrowed this idea and calls it "data class".
+case class Card(rank: Rank, suit: Suit) extends Ordered[Card] {
 
   def isDiamonds: Boolean = this.suit eq Suit.DIAMONDS
 
@@ -27,18 +30,6 @@ class Card(val rank: Rank, val suit: Suit) extends Ordered[Card] {
 
   override def compare(that: Card): Int =
     (this.suit, this.rank) compare (that.suit, that.rank)
-
-  def canEqual(other: Any): Boolean = other.isInstanceOf[Card]
-
-  override def equals(other: Any): Boolean = other match {
-    case that: Card =>
-      (that canEqual this) &&
-        this.isSameSuit(that.suit) &&
-        this.isSameRank(that.rank)
-    case _ => false
-  }
-
-  override def hashCode(): Int = 31 * rank.hashCode + suit.hashCode
 
   override def toString: String = this.rank + " of " + this.suit
 }
