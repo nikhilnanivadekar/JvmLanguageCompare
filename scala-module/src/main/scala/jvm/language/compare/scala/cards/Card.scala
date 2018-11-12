@@ -5,10 +5,20 @@ import jvm.language.compare.scala.cards.Suit.Suit
 
 object Card {
   def getCards: Set[Card] =
-    Rank.values
-      .flatMap(rank =>
+    Rank.values.flatMap(rank =>
         Suit.values.map(suit =>
-          new Card(rank, suit)))
+          Card(rank, suit)
+        )
+    )
+
+  // This style is more advanced but it scales a bit better and can be more readable.
+  // This style is called a for-comprehension. You can add filters and definitions in a for-comprehension as well.
+  def getCards_forComprehensionStyle: Set[Card] =
+    for{
+      rank <- Rank.values
+      suit <- Suit.values
+    } yield Card(rank, suit)
+
 }
 
 // case classes are very frequently used because they are so convienient.
