@@ -3,19 +3,20 @@ package jvm.language.compare.scala.cards
 import jvm.language.compare.scala.cards.Rank.Rank
 import jvm.language.compare.scala.cards.Suit.Suit
 
+import scala.collection.immutable.Seq
 import scala.collection.mutable
 import scala.util.Random
 
 class ScalaDeckOfCards() {
-  val cards: Seq[Card] = Card.getCards.toBuffer.sorted
-  val cardsBySuit: Map[Suit, Seq[Card]] = this.cards.groupBy(_.suit)
+  val cards: List[Card] = Card.getCards.toList.sorted
+  val cardsBySuit: Map[Suit, Seq[Card]] = cards.groupBy(_.suit)
   var deck: mutable.ArrayStack[Card] = mutable.ArrayStack()
 
   def shuffle(random: Random) {
-    var list: List[Card] = random.shuffle(this.cards.toList)
-    list = random.shuffle(list)
-    list = random.shuffle(list)
-    list.foreach((card: Card) => this.deck.push(card))
+    val cardsShuffled: List[Card] = random.shuffle(cards)
+    cardsShuffled.foreach((card: Card) => deck.push(card))
+// More advanced but easier to write &read when you get the hang of it.
+//    cardsShuffled.foreach(deck.push)
   }
 
   def deal(count: Int): mutable.HashSet[Card] = {
