@@ -10,7 +10,7 @@ import scala.util.Random
 class ScalaDeckOfCards() {
   val cards: List[Card] = Card.getCards.toList.sorted
   val cardsBySuit: Map[Suit, Seq[Card]] = cards.groupBy(_.suit)
-  var deck: mutable.ArrayStack[Card] = mutable.ArrayStack()
+  val deck: mutable.ArrayStack[Card] = mutable.ArrayStack()
 
   def shuffle(random: Random) {
     val cardsShuffled: List[Card] = random.shuffle(cards)
