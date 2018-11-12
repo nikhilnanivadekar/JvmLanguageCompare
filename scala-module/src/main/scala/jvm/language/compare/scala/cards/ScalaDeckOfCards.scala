@@ -45,9 +45,9 @@ class ScalaDeckOfCards() {
 
   def clubs: Seq[Card] = this.cardsBySuit(Suit.CLUBS)
 
-  def countsBySuit: Map[Suit, Int] = this.cards.groupBy(_.suit).map { case (suit, seq) => (suit, seq.size) }
+  def countsBySuit: Map[Suit, Int] = this.cards.groupBy(_.suit).mapValues(_.length)
 
-  def countsByRank: Map[Rank, Int] = this.cards.groupBy(_.rank).map { case (suit, seq) => (suit, seq.size) }
+  def countsByRank: Map[Rank, Int] = this.cards.groupBy(_.rank).mapValues(_.length)
 
   def getCards: Seq[Card] = this.cards
 
