@@ -13,15 +13,15 @@ data class KotlinDeckOfCards(
     // Using MutableStack in Kotlin from EC, because as of 10/10/2018 Kotlin does not have a Stack or a Deque.
     // It uses these data structures from JDK.
     fun shuffle(random: Random) {
-        var cardCopy = this.cards.toMutableList()
+        val cardCopy = this.cards.toMutableList()
         IntRange(1, 3).forEach { cardCopy.shuffle(random) }
         this.deck = Stacks.mutable.withAll(cardCopy)
     }
 
     fun deal(count: Int): MutableSet<Card> {
-        var pop = this.deck.pop(count)
+        val pop = this.deck.pop(count)
 
-        var outputSet: MutableSet<Card> = mutableSetOf()
+        val outputSet: MutableSet<Card> = mutableSetOf()
         outputSet.addAll(pop)
         return outputSet
     }
@@ -38,13 +38,13 @@ data class KotlinDeckOfCards(
     fun dealHands(hands: Int, cardsPerHand: Int): List<MutableSet<Card>> =
             IntRange(1, hands).map { _ -> this.deal(cardsPerHand) }
 
-    fun diamonds() = this.cardsBySuit.get(Suit.DIAMONDS)
+    fun diamonds() = this.cardsBySuit[Suit.DIAMONDS]
 
-    fun hearts() = this.cardsBySuit.get(Suit.HEARTS)
+    fun hearts() = this.cardsBySuit[Suit.HEARTS]
 
-    fun spades() = this.cardsBySuit.get(Suit.SPADES)
+    fun spades() = this.cardsBySuit[Suit.SPADES]
 
-    fun clubs() = cardsBySuit.get(Suit.CLUBS)
+    fun clubs() = cardsBySuit[Suit.CLUBS]
 
     fun countsBySuit() = this.cards.groupingBy { it.suit }.eachCount()
 

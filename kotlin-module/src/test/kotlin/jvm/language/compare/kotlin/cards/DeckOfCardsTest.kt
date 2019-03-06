@@ -68,7 +68,7 @@ class DeckOfCardsTest {
 
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
-            val jdkHand = SetAdapter.adapt(jdkHands.get(index))
+            val jdkHand = SetAdapter.adapt(jdkHands[index])
             javaKotlinCardEquals(jdkHand, kotlinHand)
         }
     }
@@ -86,7 +86,7 @@ class DeckOfCardsTest {
         kotlinHands.forEach { kotlinHand -> Verify.assertSize(5, kotlinHand) }
 
         kotlinHands.forEachIndexed { index, kotlinHand ->
-            val jdkHand = SetAdapter.adapt(jdkHands.get(index))
+            val jdkHand = SetAdapter.adapt(jdkHands[index])
             javaKotlinCardEquals(jdkHand, kotlinHand)
         }
     }
@@ -98,27 +98,27 @@ class DeckOfCardsTest {
 
         javaKotlinCardEquals(
                 jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.CLUBS),
-                kotlinCardsBySuit.get(Suit.CLUBS))
+                kotlinCardsBySuit[Suit.CLUBS])
         javaKotlinCardEquals(
                 jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.DIAMONDS),
-                kotlinCardsBySuit.get(Suit.DIAMONDS))
+                kotlinCardsBySuit[Suit.DIAMONDS])
         javaKotlinCardEquals(
                 jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.HEARTS),
-                kotlinCardsBySuit.get(Suit.HEARTS))
+                kotlinCardsBySuit[Suit.HEARTS])
         javaKotlinCardEquals(
                 jdkCardsBySuit.get(jvm.language.compare.java.cards.Suit.SPADES),
-                kotlinCardsBySuit.get(Suit.SPADES))
+                kotlinCardsBySuit[Suit.SPADES])
     }
 
     @Test
     fun countsBySuit() {
-        Verify.assertAllSatisfy(Suit.values().asIterable()) { suit -> this.kotlinDeck.countsBySuit().get(suit) == 13 }
+        Verify.assertAllSatisfy(Suit.values().asIterable()) { suit -> this.kotlinDeck.countsBySuit()[suit] == 13 }
         Verify.assertAllSatisfy(jvm.language.compare.java.cards.Suit.values().asIterable()) { suit -> this.jdkDeck.countsBySuit().occurrencesOf(suit) == 13 }
     }
 
     @Test
     fun countsByRank() {
-        Verify.assertAllSatisfy(Rank.values().asIterable()) { rank -> this.kotlinDeck.countsByRank().get(rank) == 4 }
+        Verify.assertAllSatisfy(Rank.values().asIterable()) { rank -> this.kotlinDeck.countsByRank()[rank] == 4 }
         Verify.assertAllSatisfy(jvm.language.compare.java.cards.Rank.values().asIterable()) { rank -> this.jdkDeck.countsByRank().occurrencesOf(rank) == 4 }
     }
 
