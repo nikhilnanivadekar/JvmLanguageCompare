@@ -21,8 +21,8 @@ object Card {
 
 }
 
-// case classes are very frequently used because they are so convienient.
-// case clases have hashCode, equals and toString methods all defined.
+// case classes are very frequently used because they are so convenient.
+// case classes have hashCode, equals and toString methods all defined.
 // Kotlin borrowed this idea and calls it "data class".
 case class Card(rank: Rank, suit: Suit) extends Ordered[Card] {
 
