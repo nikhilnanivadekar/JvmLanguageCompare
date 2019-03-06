@@ -3,7 +3,7 @@ package jvm.language.compare.groovy.cards
 class GroovyDeckOfCards {
     private List<Card> cards = Card.cards().sort()
     private Map<Suit, List<Card>> cardsBySuit = this.cards.groupBy { it.getSuit() }
-    private List<Card> deck = new ArrayList<>()
+    private List<Card> deck = []
 
     GroovyDeckOfCards() {
     }
@@ -39,27 +39,27 @@ class GroovyDeckOfCards {
     }
 
     List<Card> diamonds() {
-        this.cardsBySuit.get(Suit.DIAMONDS)
+        this.cardsBySuit[Suit.DIAMONDS]
     }
 
     List<Card> hearts() {
-        this.cardsBySuit.get(Suit.HEARTS)
+        this.cardsBySuit[Suit.HEARTS]
     }
 
     List<Card> spades() {
-        this.cardsBySuit.get(Suit.SPADES)
+        this.cardsBySuit[Suit.SPADES]
     }
 
     List<Card> clubs() {
-        this.cardsBySuit.get(Suit.CLUBS)
+        this.cardsBySuit[Suit.CLUBS]
     }
 
     Map<Suit, Integer> countsBySuit() {
-        this.cards.countBy { it.getSuit() }
+        this.cards.countBy { it.suit }
     }
 
     Map<Rank, Integer> countsByRank() {
-        this.cards.countBy { it.getRank() }
+        this.cards.countBy { it.rank }
     }
 
     List<Card> getCards() {
