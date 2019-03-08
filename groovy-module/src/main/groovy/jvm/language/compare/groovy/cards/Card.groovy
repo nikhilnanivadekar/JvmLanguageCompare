@@ -13,10 +13,8 @@ class Card {
     }
 
     static List<Card> cards() {
-        Set<Rank> ranks = EnumSet.allOf(Rank.class)
-        Set<Suit> suits = EnumSet.allOf(Suit.class)
-        ranks.collectMany { rank ->
-            suits.collect { suit -> new Card(rank, suit) }
+        Rank.values().collectMany { rank ->
+            Suit.values().collect { suit -> new Card(rank, suit) }
         }
     }
 
