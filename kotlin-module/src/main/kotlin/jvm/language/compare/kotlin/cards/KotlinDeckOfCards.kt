@@ -14,7 +14,7 @@ data class KotlinDeckOfCards(
     // It uses these data structures from JDK.
     fun shuffle(random: Random) {
         val cardCopy = this.cards.toMutableList()
-        IntRange(1, 3).forEach { cardCopy.shuffle(random) }
+        repeat(3) { cardCopy.shuffle(random) }
         this.deck = Stacks.mutable.withAll(cardCopy)
     }
 
@@ -26,7 +26,7 @@ data class KotlinDeckOfCards(
         return outputSet
     }
 
-    fun dealOneCard() = this.deck.pop()
+    fun dealOneCard(): Card = this.deck.pop()
 
     fun cardsLeftInDeck() = this.deck.size()
 
@@ -36,7 +36,7 @@ data class KotlinDeckOfCards(
     }
 
     fun dealHands(hands: Int, cardsPerHand: Int): List<MutableSet<Card>> =
-            IntRange(1, hands).map { _ -> this.deal(cardsPerHand) }
+            IntRange(1, hands).map { this.deal(cardsPerHand) }
 
     fun diamonds() = this.cardsBySuit[Suit.DIAMONDS]
 
